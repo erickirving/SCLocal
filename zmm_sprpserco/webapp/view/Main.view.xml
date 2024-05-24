@@ -1,0 +1,327 @@
+<mvc:View controllerName="zmmsprpserco.zmmsprpserco.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" 
+    	xmlns:html="http://www.w3.org/1999/xhtml" 
+        xmlns:layout="sap.ui.layout" 
+        xmlns:uit="sap.ui.table" 
+        xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" 
+    xmlns:variant="sap.ui.comp.variants" 
+    xmlns:tnt="sap.tnt">
+    <tnt:ToolHeader>
+		<Button text="Home" id="home" type="Transparent" press="onhomepage"></Button>
+		<!--ariaHasPopup="Menu" -->
+		<ToolbarSpacer/>
+		<Title titleStyle="H4" text="Service Confirmation" class="sapUiSmallMargin" id="titleText"/>
+		<ToolbarSpacer/>
+	</tnt:ToolHeader>
+    <Page class="sapUiSizeCompact" showHeader="false">
+        <content >
+			<layout:BlockLayout id="BlockLayout" class="viewOneBlckLayRow sapUiNoMargin sapUiNoContentPadding">
+				<layout:BlockLayoutRow >
+					<layout:BlockLayoutCell width="1">
+						<VBox backgroundDesign="Solid">
+							<IconTabBar id="idIconTabBar6" backgroundDesign="Solid" headerMode="Inline" class="sapUiNoContentPadding" select="onTabChang">
+								<items>
+									<IconTabFilter key="Tab1" text="All" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab2" text="Returned" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab3" text="Withdrawn" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab4" text="In Process" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab5" text="Vendor Review" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab6" text="None" count="0"></IconTabFilter>
+									<IconTabFilter key="Tab7" text="None" count="0"></IconTabFilter>
+								</items>
+								<content>
+									<VBox backgroundDesign="Solid">
+										<Panel headerText="Hide Quick Criteria Maintenance" expandable="true" id="myPanel" expand="onPanelExpand">
+											<headerToolbar>
+												<OverflowToolbar>
+													<Title text="Show Quick Criteria Maintenance" id="panelTitle"/>
+													<ToolbarSpacer/>
+													<!--<Button text="Personalize" icon="sap-icon://settings" press="onPersonalizeButton"/>-->
+												</OverflowToolbar>
+											</headerToolbar>
+											<infoToolbar>
+												<OverflowToolbar id="panelInfoBar" visible="false">
+													<Text text="No record exists for the selection criteria"/>
+												</OverflowToolbar>
+											</infoToolbar>
+											<content>
+												<f:SimpleForm id="formQuickMaintenance" layout="ResponsiveGridLayout" width="50%">
+													<f:content>
+														<Label text="Vendor Number" class="sapUiTinyMarginTop" visible="true" required="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputVendorNumber" tokenUpdate="onMITokenUpdate" name="inputVendorNumber" showValueHelp="true"
+															valueHelpRequest="onInputValueHelp" valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Document Date" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<DatePicker id="inputDocumentDateFrom" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" placeholder="MM/DD/YYYY" change="validateDate">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</DatePicker>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<DatePicker id="inputDocumentDateTo" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" placeholder="MM/DD/YYYY" change="validateDate">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</DatePicker>
+														<Label text="PRN Number" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputPRNFrom" tokenUpdate="onMITokenUpdate" name="inputPRN" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputPRNTo" tokenUpdate="onMITokenUpdate" name="inputPRN" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Purchase Order No." class="sapUiTinyMarginTop" visible="true" wrapping="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputPOFrom" tokenUpdate="onMITokenUpdate" name="inputPO" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputPOTo" tokenUpdate="onMITokenUpdate" name="inputPO" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<!--<Label text="Source No." class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputSourceFrom" tokenUpdate="onMITokenUpdate" name="inputSource" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputSourceTo" tokenUpdate="onMITokenUpdate" name="inputSource" showValueHelp="true" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>-->
+														<Label text="Document Number" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputDocumentFrom" name="inputDocument" showValueHelp="true" tokenUpdate="onMITokenUpdate"
+															valueHelpRequest="onInputValueHelp" valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputDocumentTo" name="inputDocument" showValueHelp="true" tokenUpdate="onMITokenUpdate" valueHelpRequest="onInputValueHelp"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Document Name" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputDocumentName" name="inputDocumentName" showValueHelp="true" tokenUpdate="onMITokenUpdate"
+															valueHelpRequest="onInputValueHelp" valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Status" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<Select id="inputStatus" items="{Status>/}" selectedKey="">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+															<items>
+																<core:Item key="{Status>Status}" text="{Status>Status}"/>
+															</items>
+														</Select>
+														<Label text="Status Change Date" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<DatePicker id="inputStatusDateFrom" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" placeholder="MM/DD/YYYY">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</DatePicker>
+														<Label text="To" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M1"/>
+															</layoutData>
+														</Label>
+														<DatePicker id="inputStatusDateTo" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" placeholder="MM/DD/YYYY">
+															<layoutData>
+																<layout:GridData span="L4 M4"/>
+															</layoutData>
+														</DatePicker>
+														<Label text="Control Name" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputControl" name="inputControl" showValueHelp="true" valueHelpRequest="onInputValueHelp" tokenUpdate="onMITokenUpdate"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="SCE Contact Name" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputContact" name="inputContact" showValueHelp="true" valueHelpRequest="onInputValueHelp" tokenUpdate="onMITokenUpdate"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Group Type" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputGroupType" name="inputGroup" showValueHelp="true" valueHelpRequest="onInputValueHelp" tokenUpdate="onMITokenUpdate"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+														<Label text="Group Name" class="sapUiTinyMarginTop" visible="true">
+															<layoutData>
+																<layout:GridData span="L2 M3"/>
+															</layoutData>
+														</Label>
+														<MultiInput id="inputGroupName" name="inputGroupName" showValueHelp="true" valueHelpRequest="onInputValueHelp" tokenUpdate="onMITokenUpdate"
+															valueHelpOnly="true">
+															<layoutData>
+																<layout:GridData span="L10 M9"/>
+															</layoutData>
+														</MultiInput>
+													</f:content>
+												</f:SimpleForm>
+												<HBox direction="RowReverse" width="50%">
+													<Button text="Clear" type="Emphasized" press="onClearButton" class="sapUiSmallMarginEnd"/>
+													<Button text="Apply" type="Emphasized" press="onApplyButton" class="sapUiTinyMarginEnd"/>
+												</HBox>
+											</content>
+										</Panel>
+									</VBox>
+									<VBox backgroundDesign="Solid">
+										<!--<uit:Table rows="{WOHeader>/results}" ariaLabelledBy="title" enableCellFilter="true" visibleRowCount="8" selectionMode="Single"-->
+										<!--showColumnVisibilityMenu="true" id="tableTO" rowSelectionChange="onTOTableRowSelection">-->
+										<uit:Table rows="{WOHeader>/results}" ariaLabelledBy="title" enableCellFilter="true" visibleRowCount="15" showColumnVisibilityMenu="true"
+											id="tableTOSCS" rowSelectionChange="onTOTableRowSelection" fixedColumnCount="2" filter="onTableFilter">
+											<uit:extension>
+												<OverflowToolbar style="Clear">
+													<Text id="tableTitle" text="View: "/>
+													<variant:VariantManagement variantItems="{/VariantList}" select="onSelect" save="onSaveAs" enabled="true" manage="onManage"
+														showExecuteOnSelection="false" showShare="false" id="Variants" standardItemText="All">
+														<variant:variantItems>
+															<variant:VariantItem text="{Name}" key="{Key}"/>
+														</variant:variantItems>
+													</variant:VariantManagement>
+													<!--<Text id="tableTitle" text="View: "/>-->
+													<!--<Select items="{ViewDropDown>/}" id="selectCurrentView" change="onViewChangeInTable">-->
+													<!--	<items>-->
+													<!--		<core:Item key="{ViewDropDown>View_name}" text="{ViewDropDown>View_name}"/>-->
+													<!--	</items>-->
+													<!--</Select>-->
+													<!--variantItems="{/VariantList}"-->
+													<!--<variant:VariantManagement select="onSelect" save="onSaveAs" enabled="true" manage="onManage" showExecuteOnSelection="false"
+														showShare="false" id="Variants" standardItemText="All">
+														<variant:variantItems>
+															<variant:VariantItem text="{Name}" key="{Key}"/>
+														</variant:variantItems>
+													</variant:VariantManagement>-->
+													<!--<Button type="Transparent" icon="sap-icon://detail-view" text="Display PO" id="buttonPODetails" enabled="false" press="onWODetailsBtn"/>-->
+													<!--<Button id="buttonPrintSel" type="Transparent" icon="sap-icon://print" text="Print Selected" press="onPrintSelPress" enabled="false"/>-->
+													<Button type="Transparent" icon="sap-icon://print" text="Print Version" press="onPrintPress"/>
+													<Button id="idAccept" type="Transparent" enabled="false" icon="sap-icon://accept" text="Accept" visible="false" press="onPressAccept"/>
+													<Button type="Transparent" icon="sap-icon://excel-attachment" text="Export" press="onExport">
+														<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+													</Button>
+													<ToolbarSpacer/>
+													<!--<Button icon="sap-icon://user-settings" press="onSettingsPress"/>-->
+												</OverflowToolbar>
+											</uit:extension>
+											<uit:footer>
+												<OverflowToolbar id="infobar" class="sapUiNoMargin">
+													<Text text="Last Refresh: Not Executed yet" id="refreshText"/>
+													<!--<tnt:InfoLabel  text="Last Refresh: Not Executed yet" colorScheme="8"/>-->
+													<Button text="Refresh" type="Transparent" icon="sap-icon://refresh" class="sapUiNoMargin" press="onApplyButton"/>
+													<ToolbarSpacer/>
+													<!--<Label text="Total Value($):" design="Bold"/>-->
+													<tnt:InfoLabel  text="Total Value($): {path:'ViewData>/grandTotal', formatter:'.formatter.toFloat'}" colorScheme="8"/>
+													<!--<ObjectNumber number="{path:'ViewData>/grandTotal', formatter:'.formatter.toFloat'}" state="Success"/>-->
+												</OverflowToolbar>
+											</uit:footer>
+										</uit:Table>
+									</VBox>
+								</content>
+							</IconTabBar>
+						</VBox>
+					</layout:BlockLayoutCell>
+				</layout:BlockLayoutRow>
+			</layout:BlockLayout>
+		</content>
+	</Page>
+</mvc:View>
